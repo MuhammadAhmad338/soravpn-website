@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { RootState } from '../store/store';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API_URL = 'http://192.168.18.78:4000/api/auth'; // Replace with your API
+const API_URL = 'http://138.199.232.44:4000/api/auth'; // Replace with your API
 
 interface User {
   id: string;
