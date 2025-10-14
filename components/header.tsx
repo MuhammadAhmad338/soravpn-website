@@ -15,16 +15,16 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="hidden md:flex gap-8 text-gray-700 font-medium text-md">
-          <Link href="#features" className="hover:text-orange-600 transition">
+          <Link href="/" className="hover:text-orange-600 transition">
             Features
           </Link>
-          <Link href="#plans" className="hover:text-orange-600 transition">
+          <Link href="plans" className="hover:text-orange-600 transition">
             Plans
           </Link>
-          <Link href="#download" className="hover:text-orange-600 transition">
+          {/* <Link href="download" className="hover:text-orange-600 transition">
             Download
-          </Link>
-          <Link href="#support" className="hover:text-orange-600 transition">
+          </Link> */}
+          <Link href="support" className="hover:text-orange-600 transition">
             Support
           </Link>
         </nav>
