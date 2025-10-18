@@ -21,9 +21,9 @@ const Header = () => {
           <Link href="plans" className="hover:text-orange-600 transition">
             Plans
           </Link>
-          {/* <Link href="download" className="hover:text-orange-600 transition">
+          <Link href="download" className="hover:text-orange-600 transition">
             Download
-          </Link> */}
+          </Link>
           <Link href="support" className="hover:text-orange-600 transition">
             Support
           </Link>
