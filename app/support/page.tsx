@@ -1,7 +1,38 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { submitSupport, clearSupportState, selectSupport } from "@/reducers/supportSlice";
+import { AppDispatch } from "@/store/store";
 
 const Support = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { loading, error, success } = useSelector(selectSupport);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Clear previous support status when unmounting/navigating away
+    return () => {
+      dispatch(clearSupportState());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (success) {
+      // clear form on success
+      setName("");
+      setEmail("");
+      setMessage("");
+    }
+  }, [success]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(submitSupport({ name, email, message }));
+  };
+
   return (
     <section className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-6 py-20">
       {/* Header */}
@@ -18,27 +49,41 @@ const Support = () => {
           <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center md:text-left">
             Contact Us
           </h2>
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               type="text"
               placeholder="Your Name"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-600"
+              required
             />
             <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="Your Email"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-600"
+              required
             />
             <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               placeholder="How can we help you?"
               rows={5}
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-600"
+              required
             ></textarea>
+
+            {error && <div className="text-red-600 text-sm">{error}</div>}
+            {success && <div className="text-green-600 text-sm">{success}</div>}
+
             <button
               type="submit"
-              className="w-full bg-orange-600 text-white py-3 rounded-lg font-medium hover:bg-orange-700 transition"
+              disabled={loading}
+              className={`w-full ${loading ? 'bg-orange-400' : 'bg-orange-600'} text-white py-3 rounded-lg font-medium hover:bg-orange-700 transition`}
             >
-              Send Message
+              {loading ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </div>
