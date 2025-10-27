@@ -3,6 +3,7 @@ import React from "react";
 const Plans = () => {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-6 py-20">
+      
       <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6 text-center">
         Choose Your Plan
       </h1>
@@ -58,6 +59,7 @@ const Plans = () => {
             Go Pro
           </button>
         </div>
+
       </div>
     </section>
   );

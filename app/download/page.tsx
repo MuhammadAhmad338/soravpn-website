@@ -15,9 +15,9 @@ const DownloadPage = () => {
       </p>
 
       {/* Download Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+      <div className="flex justify-center w-full max-w-6xl">
         {/* Android Download Card */}
-        <div className="bg-white p-10 rounded-2xl shadow-md text-center hover:shadow-lg transition-all duration-300">
+        <div className="bg-white p-10 rounded-2xl shadow-md text-center hover:shadow-lg transition-all duration-300 max-w-5xl">
           <Image
             src="/androidicon.png"
             alt="Android"
@@ -34,26 +34,7 @@ const DownloadPage = () => {
             <Download size={20} /> Download APK
           </a>
         </div>
-
-        {/* Windows Download Card */}
-        <div className="bg-white p-10 rounded-2xl shadow-md text-center hover:shadow-lg transition-all duration-300">
-          <Image
-            src="/windows11.png"
-            alt="Windows"
-            className="w-20 mx-auto mb-6"
-            width={80}
-            height={80}
-          />
-          <h2 className="text-2xl font-semibold mb-2 text-gray-800">Windows</h2>
-          <p className="text-gray-500 mb-6">Download the Windows installer</p>
-          <a
-            href="/downloads/soravpn-setup.exe"
-            className="flex items-center justify-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg mx-auto hover:bg-orange-700 transition font-medium"
-          >
-            <Download size={20} /> Download EXE
-          </a>
-        </div>
-      </div>
+      </div> 
 
       {/* Support link */}
       <p className="text-gray-500 text-sm mt-12 text-center max-w-xl">
