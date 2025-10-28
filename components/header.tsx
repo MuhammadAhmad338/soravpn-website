@@ -27,6 +27,9 @@ const Header = () => {
           <Link href="support" className="hover:text-orange-600 transition">
             Support
           </Link>
+          <Link href="ip-checker" className="hover:text-orange-600 transition">
+            IP Checker
+          </Link>
         </nav>
 
         {/* Auth Buttons */}

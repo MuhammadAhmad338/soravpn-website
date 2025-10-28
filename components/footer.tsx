@@ -17,14 +17,14 @@ const Footer = () => {
 
           {/* Links */}
           <div className="grid grid-cols-2 gap-6">
-            <div>
+            {/* <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide mb-2">Company</h3>
               <ul className="space-y-2 text-sm">
                 <li><a href="#" className="hover:underline">About</a></li>
                 <li><a href="#" className="hover:underline">Careers</a></li>
                 <li><a href="#" className="hover:underline">Blog</a></li>
               </ul>
-            </div>
+            </div> */}
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide mb-2">Support</h3>
               <ul className="space-y-2 text-sm">
