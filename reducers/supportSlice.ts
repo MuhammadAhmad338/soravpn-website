@@ -1,11 +1,9 @@
-
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import type { RootState } from '../store/store';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API_URL = 'http://localhost:4000/api/feedback'; // Replace with your API
+const API_URL = 'https://api.datascape.site/api/feedback'; // Replace with your API
 
 interface SupportData {
     name: string;
