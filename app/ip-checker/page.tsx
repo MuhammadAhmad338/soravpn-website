@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 interface IpInfo {
   ip: string;
   country_name: string;
+  country_code: string;
   org: string;
   error?: boolean;
 }
@@ -14,9 +15,10 @@ export default function IpChecker() {
   useEffect(() => {
     fetch("/api/ip-checker")
       .then((res) => res.json())
-      .then(setIpInfo)
-      .catch(() => setIpInfo({ error: true } as IpInfo));
+      .then((data) => setIpInfo(data))
+      .catch((err) => console.error("Could not fetch IP info:", err));
   }, []);
+
 
   const renderContent = () => {
     if (!ipInfo) {

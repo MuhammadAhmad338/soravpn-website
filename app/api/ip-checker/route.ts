@@ -1,22 +1,20 @@
-// app/api/ip-checker/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const ipApis = [
-      'https://api.ipify.org?format=json',
-      'https://ipapi.co/json/',
-      'https://api64.ipify.org?format=json',
+    const forwarded = request.headers.get("x-forwarded-for");
+    const ip = forwarded?.split(",")[0] || "8.8.8.8"; // fallback
+
+    const apis = [
+      `https://ipwho.is/${ip}`,
+      `https://ipapi.co/${ip}/json/`,
+      `https://ipinfo.io/${ip}/json`,
     ];
 
     let data = null;
-
-    for (const api of ipApis) {
+    for (const api of apis) {
       try {
-        const res = await fetch(api, {
-          headers: { 'User-Agent': 'SoraVPN-IP-Checker/1.0' },
-          cache: 'no-store',
-        });
+        const res = await fetch(api, { cache: "no-store" });
         if (res.ok) {
           data = await res.json();
           break;
@@ -26,26 +24,18 @@ export async function GET() {
       }
     }
 
-    if (!data) throw new Error('All IP APIs failed');
+    if (!data) throw new Error("All IP APIs failed");
 
-    // Get location details if missing
-    if (data.ip && !data.country_name) {
-      try {
-        const detailRes = await fetch(`https://ipapi.co/${data.ip}/json/`);
-        if (detailRes.ok) {
-          const detail = await detailRes.json();
-          data = { ...data, ...detail };
-        }
-      } catch {}
-    }
+    const ipInfo = {
+      ip: data.ip || ip,
+      country_name: data.country || data.country_name || "N/A",
+      country_code: data.country_code || data.countryCode || "N/A",
+      org: data.connection?.org || data.org || data.isp || "Unknown",
+    };
 
-    return NextResponse.json(data, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    });
-  } catch (e) {
-    console.error('IP Checker Error:', e);
+    return NextResponse.json(ipInfo);
+  } catch (error) {
+    console.error("IP API Error:", error);
     return NextResponse.json({ error: true }, { status: 500 });
-  } 
+  }
 }
