@@ -1,69 +1,51 @@
+// app/api/ip-checker/route.ts
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    // Try multiple IP APIs as fallback
-    const apis = [
+    const ipApis = [
       'https://api.ipify.org?format=json',
       'https://ipapi.co/json/',
-      'https://api64.ipify.org?format=json'
+      'https://api64.ipify.org?format=json',
     ];
 
     let data = null;
-    let lastError = null;
 
-    for (const apiUrl of apis) {
+    for (const api of ipApis) {
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
-
-        const response = await fetch(apiUrl, {
-          headers: {
-            'User-Agent': 'SoraVPN-IP-Checker/1.0',
-          },
-          signal: controller.signal,
+        const res = await fetch(api, {
+          headers: { 'User-Agent': 'SoraVPN-IP-Checker/1.0' },
+          cache: 'no-store',
         });
-
-        clearTimeout(timeoutId);
-
-        if (response.ok) {
-          data = await response.json();
+        if (res.ok) {
+          data = await res.json();
           break;
         }
-      } catch (error) {
-        lastError = error;
+      } catch {
         continue;
       }
     }
 
-    if (!data) {
-      throw lastError || new Error('All IP APIs failed');
-    }
+    if (!data) throw new Error('All IP APIs failed');
 
-    // If we got basic IP from ipify, try to get more details from ipapi
+    // Get location details if missing
     if (data.ip && !data.country_name) {
       try {
-        const detailResponse = await fetch(`https://ipapi.co/${data.ip}/json/`, {
-          headers: {
-            'User-Agent': 'SoraVPN-IP-Checker/1.0',
-          },
-        });
-
-        if (detailResponse.ok) {
-          const detailData = await detailResponse.json();
-          data = { ...data, ...detailData };
+        const detailRes = await fetch(`https://ipapi.co/${data.ip}/json/`);
+        if (detailRes.ok) {
+          const detail = await detailRes.json();
+          data = { ...data, ...detail };
         }
-      } catch {
-        // Keep basic data if detailed fetch fails
-      }
+      } catch {}
     }
 
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error('IP API Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch IP information' },
-      { status: 500 }
-    );
+    return NextResponse.json(data, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  } catch (e) {
+    console.error('IP Checker Error:', e);
+    return NextResponse.json({ error: true }, { status: 500 });
   }
 }
