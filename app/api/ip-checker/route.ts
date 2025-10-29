@@ -1,7 +1,7 @@
 // app/api/ip-checker/route.ts
 import { NextResponse } from 'next/server';
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const ipApis = [
       'https://api.ipify.org?format=json',
@@ -47,5 +47,5 @@ export async function GET(req: Request) {
   } catch (e) {
     console.error('IP Checker Error:', e);
     return NextResponse.json({ error: true }, { status: 500 });
-  }
+  } 
 }
