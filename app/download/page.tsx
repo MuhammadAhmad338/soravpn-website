@@ -28,7 +28,8 @@ const DownloadPage = () => {
           <h2 className="text-2xl font-semibold mb-2 text-gray-800">Android</h2>
           <p className="text-gray-500 mb-6">Available as an APK download</p>
           <a
-            href="/downloads/app-release.apk"
+            href="/app-release.apk"
+            download="SoraVPN.apk"
             className="flex items-center justify-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg mx-auto hover:bg-orange-700 transition font-medium"
           >
             <Download size={20} /> Download APK
