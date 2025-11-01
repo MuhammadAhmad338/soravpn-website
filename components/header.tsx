@@ -8,7 +8,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+    <header className="w-full bg-white sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-[1380px] mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
