@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { RootState } from '../store/store';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API_URL = 'https://api.datascape.site/api/feedback'; // Replace with your API
+const API_URL = 'https://api.datascape.site/api'; // Replace with your API
 
 interface SupportData {
     name: string;
@@ -29,13 +29,12 @@ export const submitSupport = createAsyncThunk<
     { rejectValue: string }
 >('auth/resetpassword', async ({ name, email, message }, { rejectWithValue }) => {
     try {
-        const res = await axios.post<{ message: string }>(`${API_URL}/contact`, { name, email, message });
+        const res = await axios.post<{ message: string }>(`${API_URL}/support/create`, { name, email, message });
         return res.data;
     } catch (error: any) {
         return rejectWithValue(error.response?.data?.message || 'Failed to reset password');
     }
 });
-
 
 const initialState: SupportState = {
     support: null,
