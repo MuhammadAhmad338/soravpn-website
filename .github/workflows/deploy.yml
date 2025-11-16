@@ -21,7 +21,7 @@ jobs:
 
     - name: Deploy to Hetzner (Next.js)
       run: |
-        ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+        ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no root@${{ secrets.SERVER_IP }} "
           cd /var/www/soravpn-website &&
           git reset --hard &&
           git clean -fd &&
