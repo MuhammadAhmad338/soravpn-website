@@ -10,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "SoraVPN",
+  title: "DoraVPN - Fast & Secure VPN App",
   description: "Fast & Secure VPN App",
 };
 
