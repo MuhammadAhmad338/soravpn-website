@@ -2,7 +2,7 @@ name: Deploy to Hetzner
 
 on:
   push:
-    branches: [ "main" ]   # runs when you push to main
+    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -21,8 +21,10 @@ jobs:
 
     - name: Deploy to Hetzner (Next.js)
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+        ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
           cd /var/www/soravpn-website &&
+          git reset --hard &&
+          git clean -fd &&
           git pull origin main &&
           npm install &&
           NEXT_DISABLE_ESLINT=1 npm run build &&
