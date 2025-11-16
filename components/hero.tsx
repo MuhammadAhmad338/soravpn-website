@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="flex flex-col md:flex-row items-center justify-center mt-10">
         <div className="md:w-1/2 text-center md:text-left space-y-6 mb-12">
           <p className="text-5xl leading-tight font-semibold">
-            DORA anything to be easy with <span className="text-orange-500 font-bold">SoraVPN.</span>
+            hello ahmad anything to be easy with <span className="text-orange-500 font-bold">SoraVPN.</span>
           </p>
           <p className='text-gray-600'>
             Provide a network for all your needs with ease and fun using SoraVPN. Discover interesting features from us.
