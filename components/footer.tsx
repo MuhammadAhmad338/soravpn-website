@@ -28,7 +28,7 @@ const Footer = () => {
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide mb-2">Support</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:underline">Help Center</a></li>
+                <li><a href="/support" className="hover:underline">Support Center</a></li>
                 <li><a href="/termsandservices" className="hover:underline">Terms of Service</a></li>
                 <li><a href="/privacypolicy" className="hover:underline">Privacy Policy</a></li>
               </ul>

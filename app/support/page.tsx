@@ -1,8 +1,8 @@
 "use client";
+import { AppDispatch } from "@/store/store";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { submitSupport, clearSupportState, selectSupport } from "@/reducers/supportSlice";
-import { AppDispatch } from "@/store/store";
 
 const Support = () => {
   const dispatch = useDispatch<AppDispatch>();
